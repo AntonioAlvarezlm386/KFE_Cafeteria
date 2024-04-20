@@ -6,7 +6,7 @@ import SaleDetails from './SalesDetail.js'
 const Sales = sequelize.define(
     'sales',{
         total: {
-            type: DataTypes.DECIMAL
+            type: DataTypes.DOUBLE
         }
     }, {
         timestamps: true

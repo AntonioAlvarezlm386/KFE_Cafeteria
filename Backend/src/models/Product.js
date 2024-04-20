@@ -8,7 +8,7 @@ const Product = sequelize.define(
             type: DataTypes.STRING
         }, 
         price:{ 
-            type: DataTypes.DECIMAL
+            type: DataTypes.DOUBLE
         },
         availability: {
             type: DataTypes.BOOLEAN,

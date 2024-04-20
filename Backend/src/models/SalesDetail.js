@@ -8,7 +8,7 @@ const SaleDetails = sequelize.define(
             type: DataTypes.INTEGER
         },
         subtotal: {
-            type: DataTypes.DECIMAL
+            type: DataTypes.DOUBLE
         }
     }, {
         timestamps: false
