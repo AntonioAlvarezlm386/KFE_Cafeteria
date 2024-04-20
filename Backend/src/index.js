@@ -1,6 +1,7 @@
 import app from './app.js'
 import { sequelize } from './db/dbConnection.js'
 import { SERVER_PORT } from './config.js'
+import * as Models from './models/index.js'
 
 
 async function main(){

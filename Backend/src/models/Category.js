@@ -7,7 +7,7 @@ const Category = sequelize.define(
             type: DataTypes.STRING
         }
     }, {
-        timestamps: falses
+        timestamps: false
     }
 )
 

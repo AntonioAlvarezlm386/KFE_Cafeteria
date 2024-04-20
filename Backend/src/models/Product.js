@@ -1,5 +1,6 @@
 import { sequelize } from '../db/dbConnection.js'
 import { DataTypes } from 'sequelize'
+import Category from './Category.js'
 
 const Product = sequelize.define(
     'products', {
@@ -9,13 +10,16 @@ const Product = sequelize.define(
         price:{ 
             type: DataTypes.DECIMAL
         },
-        stock: {
-            type: DataTypes.INTEGER
+        availability: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: true
         }
     }, {
         timestamps: true
     }
 )
 
+Product.belongsTo(Category)
+Category.hasMany(Product)
 
 export default Product

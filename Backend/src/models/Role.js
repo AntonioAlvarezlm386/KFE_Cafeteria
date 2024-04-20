@@ -1,7 +1,7 @@
 import { sequelize } from '../db/dbConnection.js'
 import { DataTypes } from 'sequelize'
 
-const User = sequelize.define(
+const Role = sequelize.define(
     'role',
     {
         name:{
@@ -13,4 +13,4 @@ const User = sequelize.define(
 )
 
 
-export default User
+export default Role
