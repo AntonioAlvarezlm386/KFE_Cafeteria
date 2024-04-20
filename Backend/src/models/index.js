@@ -3,10 +3,10 @@ import Product from "./Product.js";
 import Category from "./Category.js";
 import SaleDetails from "./SalesDetail.js";
 import Sales from "./Sales.js";
-import Role from './Role.js'
+import Role from "./Role.js"
 
 
-export default {
+export {
     User,
     Product,
     Category,

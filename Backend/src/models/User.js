@@ -1,9 +1,9 @@
 import { sequelize } from '../db/dbConnection.js'
 import { DataTypes } from 'sequelize'
 import bcrypt from 'bcryptjs'
-import Role from './Role.js'
 import { accessKeyGenerator } from '../libs/utilities.js'
 import Sales from './Sales.js'
+import Role from './Role.js'
 
 const User = sequelize.define(
     'users', {

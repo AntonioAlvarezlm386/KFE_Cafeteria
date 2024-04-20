@@ -6,7 +6,7 @@ import * as Models from './models/index.js'
 
 async function main(){
     try {
-        await sequelize.sync({alter:true});
+        await sequelize.sync();
         app.listen(SERVER_PORT)
         console.log('> app listen on port', SERVER_PORT)
     } catch (error) {
