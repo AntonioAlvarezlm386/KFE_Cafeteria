@@ -7,6 +7,9 @@ const SaleDetails = sequelize.define(
         items: {
             type: DataTypes.INTEGER
         },
+        unit_price: {
+            type: DataTypes.DOUBLE
+        },
         subtotal: {
             type: DataTypes.DOUBLE
         }
