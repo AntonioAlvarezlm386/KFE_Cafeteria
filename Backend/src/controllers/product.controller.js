@@ -1,7 +1,8 @@
-import { Op } from "sequelize";
-import { Product, Category, Sales } from "../models/index.js";
+import { Op, where } from "sequelize";
+import { Product, Category, SaleDetails, Sales } from "../models/index.js";
+import { sequelize } from "../db/dbConnection.js";
 
-/** Get all the products */
+/** CRUD controllers */
 export const getProducts = async (req, res) => {
   try {
     const products = await Product.findAll({
@@ -15,38 +16,6 @@ export const getProducts = async (req, res) => {
   }
 };
 
-export const getProduct = async (req, res) => {
-  const { id } = req.params;
-  try {
-    const dbProduct = await Product.findOne({
-      where: {
-        id,
-      },
-    });
-
-    res.json(dbProduct);
-  } catch (error) {
-    return res.status(500).json({ message: error.message });
-  }
-};
-
-export const productSales = async (req, res) => {
-  try {
-    const salesPerProduct = await Product.findAll({
-      where: {
-        id: {
-          [Op.gte]: 5,
-          [Op.lte]: 20
-        }
-      },
-    });
-    res.json(salesPerProduct);
-  } catch (error) {
-    return res.status(500).json({
-      message: error.message,
-    });
-  }
-};
 
 export const createProduct = async (req, res) => {
   const { name, price, availability, category } = req.body;
@@ -67,7 +36,6 @@ export const createProduct = async (req, res) => {
     });
 
     dbCategory.addProduct(newProduct);
-
     res.status(201).json(newProduct);
   } catch (error) {
     return res.status(500).json({
@@ -120,6 +88,48 @@ export const deleteProduct = async (req, res) => {
     res.status(200).json({
       message: "Producto eliminado",
     });
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+
+/** Management controllers */
+export const topProducts = async (req, res) => {
+  try {
+    const dbProducts = await Product.findAll({
+      limit:3,
+      attributes: {
+        include: [
+          [
+            sequelize.literal('(SELECT SUM(sales_details.items) FROM sales INNER JOIN sales_details ON sales.id = sales_details.saleId WHERE sales_details.productId = products.id)'),
+            'totalItemsSold'
+          ]
+        ]
+      },
+      order: [[sequelize.literal('totalItemsSold'), 'DESC']]
+    });
+
+    res.status(200).json(dbProducts)
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
+}
+
+
+export const productStats = async (req, res) => {
+  const {id} = req.params
+  try {
+    const dbProduct = await Product.findOne({
+      where: {
+        id
+      }
+    })
+    const productSales = await dbProduct.getSales()
+    res.status(200).json(productSales)
   } catch (error) {
     return res.status(500).json({
       message: error.message,

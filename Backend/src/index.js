@@ -6,8 +6,9 @@ import * as Models from './models/index.js'
 
 async function main(){
     try {
-        await sequelize.sync();
+        await sequelize.sync({alter: false});
         app.listen(SERVER_PORT)
+        console.log('> DB Connection successfully')
         console.log('> app listen on port', SERVER_PORT)
     } catch (error) {
         console.log("message: ", error.message)

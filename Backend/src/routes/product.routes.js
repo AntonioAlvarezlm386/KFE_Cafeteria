@@ -6,12 +6,16 @@ const router = Router()
 
 router.get('/', productController.getProducts)
 
-router.get('/sales', productController.productSales)
-
 router.post('/', productController.createProduct)
 
 router.put('/:id', productController.updateProduct)
 
 router.delete('/:id', productController.deleteProduct)
+
+/**Management routes */
+
+router.get('/:id/sales', productController.productStats)
+
+router.get('/topproducts', productController.topProducts)
 
 export default router

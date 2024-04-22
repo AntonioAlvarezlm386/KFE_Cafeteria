@@ -58,3 +58,23 @@ INSERT INTO KFE_CafeteriaDB.products (name,price,availability,createdAt,updatedA
 	 ('Frutos Secos Variados',89.99,1,'2024-04-20 03:45:47','2024-04-20 03:45:47',5);
 	 
 
+INSERT INTO KFE_CafeteriaDB.sales (total,createdAt,updatedAt,userId) VALUES
+	 (197.53,'2024-04-21 18:34:59','2024-04-13 18:34:59',1),
+	 (518.9,'2024-04-21 18:36:07','2024-04-15 18:36:07',1),
+	 (631.8,'2024-04-21 18:38:43','2024-04-18 18:38:43',1),
+	 (451.92,'2024-04-21 18:42:47','2024-04-21 18:42:47',1);
+
+
+INSERT INTO KFE_CafeteriaDB.sales_details (items,unit_price,subtotal,productId,saleId) VALUES
+	 (2,49.99,99.98,2,1),
+	 (4,49.99,199.96,2,4),
+	 (2,50.99,101.98,6,3),
+	 (2,50.99,101.98,6,4),
+	 (3,89.99,269.96,15,2),
+	 (3,74.99,224.96,20,3),
+	 (2,74.99,149.98,20,4),
+	 (1,97.95,97.95,24,1),
+	 (2,112.95,225.9,28,3),
+	 (1,78.95,78.95,31,3);
+INSERT INTO KFE_CafeteriaDB.sales_details (items,unit_price,subtotal,productId,saleId) VALUES
+	 (2,125.95,251.9,35,2);

@@ -8,7 +8,7 @@ export const signIn = async (req, res) => {
     try {
         const dbUser = await User.findOne({
             where: {
-                access_key 
+                access_key
             }
         })
 
@@ -20,8 +20,14 @@ export const signIn = async (req, res) => {
         const token = jwt.sign({id: dbUser.access_key}, SECRET, {
             expiresIn: 86400
         })
-
-        res.json({token: token})
+        
+        const role = await dbUser.getRole()
+        res.json({
+            token: token,
+            username: dbUser.first_name + " " + dbUser.last_name,
+            role: role.name,
+            access_key: dbUser.access_key
+        })
 
     } catch (error) {
         return res.status(500).json({
