@@ -18,4 +18,6 @@ router.get('/:id/sales', productController.productStats)
 
 router.get('/topproducts', productController.topProducts)
 
+router.get('/soldProducts', productController.soldProducts)
+
 export default router

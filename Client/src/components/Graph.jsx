@@ -46,22 +46,7 @@ const chartdata = [
     date: 'Sep 22',
     SemiAnalysis: 2643,
     'The Pragmatic Engineer': 2342,
-  },
-  {
-    date: 'Oct 22',
-    SemiAnalysis: 2837,
-    'The Pragmatic Engineer': 2473,
-  },
-  {
-    date: 'Nov 22',
-    SemiAnalysis: 2954,
-    'The Pragmatic Engineer': 3848,
-  },
-  {
-    date: 'Dec 22',
-    SemiAnalysis: 3239,
-    'The Pragmatic Engineer': 3736,
-  },
+  }
 ];
 
 const dataFormatter = (number) =>

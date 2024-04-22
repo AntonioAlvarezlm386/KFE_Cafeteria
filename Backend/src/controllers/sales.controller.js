@@ -1,4 +1,5 @@
 import { User, Product, Sales } from "../models/index.js";
+import { sequelize } from "../db/dbConnection.js";
 
 export const createSale = async (req, res) => {
   const { user, total, products } = req.body;
@@ -52,6 +53,42 @@ export const createSale = async (req, res) => {
 
 /** Management controller */
 
-export const getSales = () => {
+export const getSales = async(req, res) => {
+  try {
+    const dbProductsSold = await Sales.findAll({
+      attributes: ['id', 'createdAt', 'updatedAt'],
+      include: [{
+          model: Product,
+          attributes: ['id', 'name'],
+          through: { attributes: ['items'] }
+      }]
+  });
   
+  const productItemsSum = {};
+  dbProductsSold.forEach(sale => {
+    sale.products.forEach(product => {
+        const productId = product.id;
+        const items = product.sales_details.items;
+
+        if (!productItemsSum[productId]) {
+            productItemsSum[productId] = {
+                id: productId,
+                name: product.name,
+                items: 0
+            };
+        }
+
+        productItemsSum[productId].items += items;
+    });
+});
+
+const uniqueProducts = Object.values(productItemsSum);
+
+  res.status(200).json(uniqueProducts)
+
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
 }

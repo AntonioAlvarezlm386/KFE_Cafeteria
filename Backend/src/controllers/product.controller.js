@@ -136,3 +136,17 @@ export const productStats = async (req, res) => {
     });
   }
 };
+
+export const soldProducts = async (req, res) =>{
+  try {
+
+    const dbSoldProducts = await Product.findAll({
+      include: Sales
+    })
+    res.status(200).json({1:2})
+  } catch (error) {
+    return res.status(500).json({
+      message: error.message,
+    });
+  }
+}

@@ -21,17 +21,17 @@ const SalesTable = ({data}) => (
       </TableHead>
 
       <TableBody>
-        {
-          data.map( (product, index) => (
-            <TableRow>
-            <TableCell>{product.id}</TableCell>
-            <TableCell>{product.producto}</TableCell>
-            <TableCell>{product.precioU}</TableCell>
-            <TableCell>{product.piezas}</TableCell>
-            <TableCell>{product.subtotal}</TableCell>
-          </TableRow>
-          ))
-        }
+      {
+            data.map((product, index)=> (
+                <TableRow key={index}>
+                <TableCell>{product.id}</TableCell>
+                <TableCell>{product.producto}</TableCell>
+                <TableCell>{product.precioU}</TableCell>
+                <TableCell>{product.piezas}</TableCell>
+                <TableCell>{product.subtotal}</TableCell>
+                </TableRow>
+            ))
+          }
       </TableBody>
     </Table>
   </div>
