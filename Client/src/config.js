@@ -1,1 +1,1 @@
-export const LOGIN_ENDPOINT=import.meta.env.LOGIN_EP
+export const API_URL= import.meta.env.VITE_API_URL

@@ -2,7 +2,6 @@ import React from "react";
 import SalesTableReport from "./SalesTable";
 import CardTest from "./CardTest";
 import Graph from "./Graph";
-import ProductSelect from "./ProductSelect";
 import { DateRangePicker, Button } from "@tremor/react";
 
 const token = localStorage.getItem("token");
@@ -65,7 +64,6 @@ const Management = () => {
 
       <p className="p-1 bg-secondary">Análisis de ventas por producto</p>
       <div className="flex">
-      <ProductSelect />
       <Button className='bg-accent hover:bg-primary'>Enviar</Button>
       </div>
       <Graph/>

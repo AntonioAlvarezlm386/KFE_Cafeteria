@@ -1,42 +1,18 @@
 import { Divider, Card } from "@tremor/react";
 import { Outlet, Link, useNavigate } from "react-router-dom";
+import { getProducts } from "../libs/api";
 import avatar from '../assets/avatar.jpg'
 
-const username = localStorage.getItem('username')
-const role = localStorage.getItem('role')
-const token = localStorage.getItem("token")
-
-async function getProducts(){
-  try {
-    const rawResponse = await fetch("http://localhost:3000/api/products",{
-      method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-          "x-access-token": token
-        }
-    })
-
-    const products = await rawResponse.json()
-    localStorage.setItem("products", JSON.stringify(products))
-
-  } catch (error) {
-    console.error(error)
-  }
-}
+const userData = JSON.parse(localStorage.getItem("userData"))
 
 const Home = () => {
   const navigate = useNavigate()
-  getProducts()
-
   const logOut = ()=>{
-    localStorage.removeItem("token")
-    localStorage.removeItem("username")
-    localStorage.removeItem("role")
+    localStorage.removeItem("userData")
     localStorage.removeItem("products")
-    localStorage.removeItem("key")
     navigate("/")
   }
+  getProducts('products/')
 
   return (
     <div className="max-container flex h-screen">
@@ -48,8 +24,8 @@ const Home = () => {
             alt="avatar"
             className="mx-auto w-[12em]"
           />
-          <h3>{username}</h3>
-          <p>{role}</p>
+          <h3>{userData.username}</h3>
+          <p>{userData.role}</p>
         </Card>
         <Divider className="w-[80%]"/>
         <nav className="text-center text-background">
