@@ -51,13 +51,14 @@ const Sales = () => {
   const handleClick = async() => {
 try {
   await sendSale('sales/', saleData)
+  clearReceipt()
 } catch (error) {
   console.error('Error al enviar la venta:' + error.message)
 }
   }
 
   return userData.token ? (
-    <div className="h-screen overflow-y-scroll flex justify-center items-center flex-col gap-5 py-5">
+    <div className=" overflow-y-scroll h-screen flex justify-center items-center flex-col gap-5 py-5">
       <div className="flex gap-5">
         <div>
           <select name="select" value={productId} onChange={(e) => setProductId(e.target.value)} className="border-accent rounded-md">

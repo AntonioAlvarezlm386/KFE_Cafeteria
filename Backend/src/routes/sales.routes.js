@@ -5,6 +5,6 @@ const router = Router()
 
 router.post('/', createSale)
 
-router.get('/period', getSales)
+router.post('/period', getSales)
 
 export default router

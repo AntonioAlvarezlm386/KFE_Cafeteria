@@ -1,5 +1,6 @@
 import { User, Product, Sales } from "../models/index.js";
 import { sequelize } from "../db/dbConnection.js";
+import { Op } from 'sequelize'
 
 export const createSale = async (req, res) => {
   const { user, total, products } = req.body;
@@ -54,9 +55,15 @@ export const createSale = async (req, res) => {
 /** Management controller */
 
 export const getSales = async(req, res) => {
+  const { from, to } = req.body
   try {
     const dbProductsSold = await Sales.findAll({
-      attributes: ['id', 'createdAt', 'updatedAt'],
+      where: {
+        createdAt: {
+          [Op.between]: [from, to]
+        }
+      },
+      attributes: ['id', 'createdAt'],
       include: [{
           model: Product,
           attributes: ['id', 'name'],
@@ -64,6 +71,7 @@ export const getSales = async(req, res) => {
       }]
   });
   
+  console.log(dbProductsSold)
   const productItemsSum = {};
   dbProductsSold.forEach(sale => {
     sale.products.forEach(product => {

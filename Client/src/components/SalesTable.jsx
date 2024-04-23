@@ -19,15 +19,15 @@ import {
         </TableHead>
   
         <TableBody>
-          {
+          { data? 
             data.map((product, index)=> (
                 <TableRow key={index}>
                 <TableCell>{product.id}</TableCell>
                 <TableCell>{product.name}</TableCell>
                 <TableCell>{product.items}</TableCell>
                 </TableRow>
-            ))
-          }
+            )) : ""
+          } 
         </TableBody>
       </Table>
     </div>

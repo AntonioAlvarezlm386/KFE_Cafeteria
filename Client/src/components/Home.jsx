@@ -15,7 +15,7 @@ const Home = () => {
   getProducts('products/')
 
   return (
-    <div className="max-container flex h-screen">
+    <div className="max-container h-screen flex">
       <div className="w-[20em] h-full bg-primary">
         <h1 className="text-center my-6 text-secondary text-2xl">KFE Cafeteria</h1>
         <Card className=" w-[80%] text-center mx-auto">
@@ -43,7 +43,7 @@ const Home = () => {
         </nav>
         <p className="text-secondary text-center mb-0 hover:bg-divider p-2" onClick={logOut} >Cerrar sesión</p>
       </div>
-      <div className="h-full w-full">
+      <div className="h-full w-full overflow-y-scroll">
         <Outlet />
       </div>
     </div>

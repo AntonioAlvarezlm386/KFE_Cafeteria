@@ -7,6 +7,10 @@ export const getProducts = async (req, res) => {
   try {
     const products = await Product.findAll({
       attributes: ["id", "name", "price", "availability"],
+      include: {
+        model: Category,
+        attributes: ["name"]
+      }
     });
     res.json(products);
   } catch (error) {
@@ -123,30 +127,21 @@ export const topProducts = async (req, res) => {
 export const productStats = async (req, res) => {
   const {id} = req.params
   try {
-    const dbProduct = await Product.findOne({
+    const { sales } = await Product.findOne({
       where: {
         id
-      }
+      },
+      include: {
+        model: Sales,
+        attributes: ["createdAt"]
+      },
+      attributes:[]
     })
-    const productSales = await dbProduct.getSales()
-    res.status(200).json(productSales)
+
+    res.status(200).json(sales)
   } catch (error) {
     return res.status(500).json({
       message: error.message,
     });
   }
 };
-
-export const soldProducts = async (req, res) =>{
-  try {
-
-    const dbSoldProducts = await Product.findAll({
-      include: Sales
-    })
-    res.status(200).json({1:2})
-  } catch (error) {
-    return res.status(500).json({
-      message: error.message,
-    });
-  }
-}
